@@ -7,15 +7,18 @@ Este repositório contém o projeto de automação de testes para a avaliação 
 ## Como rodar cada tipo de teste
 
 ### Pré-requisitos
-* **Node.js** instalado (versão 18 ou superior recomendada).
+* **Visual Studio Code** instalado.
 * **PlayWright** instalado
 npx playwright install
 
 ### Para executar testes apenas de API
-npx playwright test pessoas_API.spec.js
+npx playwright test  tests/API/pessoas_API.spec.js
 
 ### Para executar testes apenas de UI
-npx playwright test pessoas.spec.js
+npx playwright test  tests/UI/pessoas_UI.spec.js
+
+### Para executar testes apenas de Unit Testes
+npx playwright test  tests/Unit_Tests/pessoas_Unit_Tests.spec.js
 
 ### Para executar todos os testes
 npx playwright test
@@ -23,7 +26,8 @@ npx playwright test
 
 ## Como a pirâmide foi estruturada
 
-### Camda de testes unitarios
+### Camada de Testes Unitários (Base)
+Focada em testar isoladamente as funções utilitárias e geradoras de massa de dados do próprio projeto de automação (util.js).
 
 ### Camada de Integração / API
 Concentra a maior parte das validações lógicas e contratuais. O ficheiro pessoas_API.spec.js, valida os verbos HTTP (GET, POST, PUT, DELETE), status codes, tipos de dados e cálculos de regras de negócio feitas pelo backend.
@@ -110,3 +114,15 @@ Adicionar um campo de pesquisa na tela principal (semelhante ao fluxo já existe
 
 ## Benefícios Esperados
 Facilitar a navegação do usuário e agilizar as operações de manutenção de dados (edição e remoção), melhorando significativamente a usabilidade do sistema.
+
+
+# Sugestão de Melhoria: Definição mais concreta do tipo de campo Nome
+
+## Contexto Atual
+No campo Nome, é possível colocar tanto letras, como números e também caracteres especiais, deixando a cargo do usuário a escrita correta do nome
+
+## A Melhoria Proposta
+definir o campo como alfanumérico, delimitando para letras minúsculas e maiúsculas e impedindo o uso de caracteres especiais.
+
+## Benefícios Esperados
+Reduzir a possibilidade de criar usuários com nomes errados e também reduzir, possívelmente a operação de edição de nome do usuário deixando a aplicação com mais recursos para outras operações.

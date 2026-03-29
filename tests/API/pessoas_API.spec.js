@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { atualizarUsuario, gerarUsuario, gerarUsuarioMax, validarDadosBuscarUsuario } from '../utils/faker';
-import Usuarios_Api from '../services/usuarios.api';
+import { atualizarUsuario, gerarUsuario, gerarUsuarioMax, validarDadosBuscarUsuario } from '../../utils/util';
+import Usuarios_Api from '../../services/usuarios.api';
 
 
 

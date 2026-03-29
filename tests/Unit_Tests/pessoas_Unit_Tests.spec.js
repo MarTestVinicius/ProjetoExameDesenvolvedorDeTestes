@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { gerarUsuario, gerarUsuarioMax } from '../utils/faker';
+import { gerarUsuario, gerarUsuarioMax } from '../../utils/util';
 
-test.describe('Testes Unitários - Utilitários de Dados (Faker)', () => {
+test.describe('Testes Unitários - Utilitários de Dados', () => {
 
   test('gerarUsuario deve retornar um objeto com nome dinâmico e data fixa', () => {
     // Executar a função isoladamente
