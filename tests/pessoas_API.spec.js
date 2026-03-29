@@ -142,7 +142,7 @@ test.describe('Operações em usuários', () => {
 
 });
 
-test('listar usuários/ mock da API / Testes Unitários', async ({ page }) => {
+test('listar usuários/ mock da API', async ({ page }) => {
   //Configura o Mock 
   await page.route('http://localhost:5000/api/v1/Pessoas?page=1&pageSize=20', async route => {
 
