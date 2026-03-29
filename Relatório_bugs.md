@@ -40,7 +40,7 @@ Na tentativa do usuário de criar um novo registro, a mensagem informativa "Data
 
 ---
 
-# 🚀 Sugestão de Melhoria: Adição de body específico na API para atualização e remoção
+# Sugestão de Melhoria: Adição de body específico na API para atualização e remoção
 
 ## Contexto Atual
 Atualmente, as requisições de atualização e remoção de usuários não possuem um corpo de resposta com uma mensagem ou dados específicos. Elas dependem exclusivamente do Status Code, o que limita a assertividade das validações automatizadas e manuais.
