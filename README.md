@@ -1,6 +1,6 @@
 # Automação de Testes - Processo Seletivo (QA Engineer)
 
-Este repositório contém o projeto de automação de testes para a avaliação técnica, cobrindo testes de Interface (UI) e Integração (API). O objetivo principal é garantir a fiabilidade dos contratos e a resiliência das validações no *frontend*.
+Este repositório contém o projeto de automação de testes para a avaliação técnica, cobrindo testes de Interface (UI), Integração (API) e testes Unitários.
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -25,7 +25,6 @@ npx playwright test
 
 ### Camda de testes unitarios
 
-
 ### Camada de Integração / API
 Concentra a maior parte das validações lógicas e contratuais. O ficheiro pessoas_API.spec.js, valida os verbos HTTP (GET, POST, PUT, DELETE), status codes, tipos de dados e cálculos de regras de negócio feitas pelo backend.
 
@@ -45,7 +44,6 @@ com a utilizando o fakerjs evito conflitos de dados.
 essa estrutura serve para separação de testes específicos de API, UI e Unit Teste.
 
 -----------------------------------------------------------------------------------------------------------------------------------------
-
 
 # Bug: Exibição da mensagem informativa "Data de nascimento é obrigatória." não é apresentada corretamente
 
