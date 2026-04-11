@@ -1,31 +1,37 @@
+// pessoas_Unit_Tests.spec.js
 import { test, expect } from '@playwright/test';
 import { gerarUsuario, gerarUsuarioMax } from '../../utils/util';
 
 test.describe('Testes Unitários - Utilitários de Dados', () => {
 
-  test('gerarUsuario deve retornar um objeto com nome dinâmico e data fixa', () => {
+  test('gerarUsuario deve retornar um objeto com nome e data dinâmicos', () => {
     // Executar a função isoladamente
     const usuario = gerarUsuario();
 
-    //Validar a estrutura do objeto gerado em memória
+    // Validar a estrutura do nome
     expect(usuario).toHaveProperty('nome');
     expect(typeof usuario.nome).toBe('string');
-    expect(usuario.nome.length).toBeGreaterThan(0); // Garante que o nome não vem vazio
+    expect(usuario.nome.length).toBeGreaterThan(0); 
 
+    // Validar a nova estrutura da data de nascimento
     expect(usuario).toHaveProperty('dataNascimento');
-    expect(usuario.dataNascimento).toBe('1998-05-12T01:18:29.02');
+    expect(typeof usuario.dataNascimento).toBe('string');
+    
+    // Converte a string gerada de volta para Data para garantir que é uma data real e válida
+    const isDataValida = !isNaN(Date.parse(usuario.dataNascimento));
+    expect(isDataValida).toBeTruthy();
   });
 
   test('gerarUsuarioMax deve retornar um objeto com nome de exatamente 201 caracteres', () => {
-    // Executar a função isoladamente
     const usuarioMax = gerarUsuarioMax();
 
-    // Validar a estrutura do objeto gerado em memória
     expect(usuarioMax).toHaveProperty('nome');
-    expect(usuarioMax.nome.length).toBe(201); // Valida a lógica matemática do .repeat(201)
-    
-    // Validar se a string é composta apenas por 'X'
+    expect(usuarioMax.nome.length).toBe(201); 
     expect(usuarioMax.nome).toMatch(/^X+$/); 
+    
+    // Podemos adicionar a mesma validação de data aqui também, se desejar
+    expect(usuarioMax).toHaveProperty('dataNascimento');
+    expect(typeof usuarioMax.dataNascimento).toBe('string');
   });
 
 });

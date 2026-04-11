@@ -4,21 +4,24 @@ import { expect } from '@playwright/test';
 export function gerarUsuario() {
     return {
         nome: faker.person.firstName(),
-        dataNascimento: '1998-05-12T01:18:29.02',
+        // Gera uma data de nascimento de uma pessoa com idade entre 18 e 65 anos
+        dataNascimento: faker.date.birthdate({ min: 18, max: 65, mode: 'age' }).toISOString().split('T')[0],
     };
 };
 
 export function gerarUsuarioMax() {
     return {
         nome: 'X'.repeat(201),
-        dataNascimento: '1998-05-12T01:18:29.02',
+        // Mantemos o mesmo padrão dinâmico
+        dataNascimento: faker.date.birthdate({ min: 18, max: 65, mode: 'age' }).toISOString().split('T')[0],
     };
 };
 
 export function atualizarUsuario() {
     return {
         nome: faker.person.firstName(),
-        dataNascimento: '1990-02-25T01:18:29.02',
+        // Mantemos o mesmo padrão dinâmico
+        dataNascimento: faker.date.birthdate({ min: 18, max: 65, mode: 'age' }).toISOString().split('T')[0],
     };
 };
 
