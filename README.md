@@ -1,6 +1,6 @@
-# Automação de Testes - Processo Seletivo (QA Engineer)
+# Automação de Testes
 
-Este documento contém o projeto de automação de testes para a avaliação técnica, cobrindo testes de Interface (UI), Integração (API) e testes Unitários.
+Este documento contém o projeto de automação de testes, cobrindo testes de Interface (UI), Integração (API) e testes Unitários.
 
 ---
 
