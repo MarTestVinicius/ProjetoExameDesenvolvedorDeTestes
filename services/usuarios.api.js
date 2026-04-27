@@ -1,8 +1,10 @@
+require('dotenv').config();
+
 class Usuarios_Api {
     constructor(request) {
         this.request = request;
 
-        this.apiBaseUrl = process.env.API_URL || 'http://localhost:5000';
+        this.apiBaseUrl = process.env.BASE_API;
     }
 
     listarUsuarios(version, pageSize, page, search) {
@@ -22,7 +24,8 @@ class Usuarios_Api {
     }
 
     deletarUserPorId(id, version) {
-        return this.request.delete(`${this.apiBaseUrl}/api/v${version}/Pessoas/${id}`);
+                    
+         return this.request.delete(`${this.apiBaseUrl}/api/v${version}/Pessoas/${id}`);
     }
 
 }

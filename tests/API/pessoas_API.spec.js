@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { atualizarUsuario, gerarUsuario, gerarUsuarioMax, validarDadosBuscarUsuario } from '../../utils/util';
 import Usuarios_Api from '../../services/usuarios.api';
-
+require('dotenv').config();
 
 
 const pessoas_page_default_value = 1;
@@ -16,6 +16,7 @@ test.describe('Operações em usuários', () => {
   let name_user;
   let data_nascimento_user;
   let idade_user;
+  let id_user_new;
 
   // ANTES de cada teste: Cria um usuário para garantir que exista um usuário para os testes de GET, PUT e DELETE
   test.beforeEach(async ({ request }) => {
@@ -43,6 +44,8 @@ test.describe('Operações em usuários', () => {
     //reponse da Api
     const body = await response.json();
 
+    console.log(body)
+
     //validação de propriedades
     expect(response.status()).toBe(200);
     expect(body).toHaveProperty('items');
@@ -57,13 +60,14 @@ test.describe('Operações em usuários', () => {
     //criação das informações do usuário, pegar data atual e fazer o request para API
     const payload = gerarUsuario();
     const hoje = new Date();
-    const response = await usuarios_Api.criarUsuario(version_default, payload);
+    const responseNew = await usuarios_Api.criarUsuario(version_default, payload);
 
     //reponse da Api
-    const body = await response.json();
+    const bodyNew = await responseNew.json();
+    id_user_new = bodyNew.id;
 
     //calculos para validação da idade esperada para o usuário
-    const idade_user_calc = new Date(body.dataNascimento);
+    const idade_user_calc = new Date(bodyNew.dataNascimento);
     let idade_anos = hoje.getFullYear() - idade_user_calc.getFullYear();
     const idade_mes = hoje.getMonth() - idade_user_calc.getMonth();
     if (idade_mes < 0 || (idade_mes === 0 && hoje.getDate() < idade_user_calc.getDate())) {
@@ -71,19 +75,22 @@ test.describe('Operações em usuários', () => {
     }
 
     //Validações
-    expect(response.status()).toBe(201);
-    expect(body).toHaveProperty('id');
-    expect(body).toHaveProperty('nome');
-    expect(body).toHaveProperty('dataNascimento');
-    expect(body).toHaveProperty('idade');
-    expect(body.idade).toBe(idade_anos);
+    expect(responseNew.status()).toBe(201);
+    expect(bodyNew).toHaveProperty('id');
+    expect(bodyNew).toHaveProperty('nome');
+    expect(bodyNew).toHaveProperty('dataNascimento');
+    expect(bodyNew).toHaveProperty('idade');
+    expect(bodyNew.idade).toBe(idade_anos);
 
+       //remover o usuário criado
+     await usuarios_Api.deletarUserPorId(id_user_new, version_default);
   });
 
   test('Criar usuario - POST - validar quantidade máxima do nome do usuário', async ({ request }) => {
     //gerar informações de usuário com nome maior que o esperado e fazer o request para API
     const payload = gerarUsuarioMax();
     const response = await usuarios_Api.criarUsuario(version_default, payload);
+    
 
     //validação
     expect(response.status()).toBe(400);
@@ -144,7 +151,7 @@ test.describe('Operações em usuários', () => {
 
 test('listar usuários/ mock da API', async ({ page }) => {
   //Configura o Mock 
-  await page.route('http://localhost:5000/api/v1/Pessoas?page=1&pageSize=20', async route => {
+  await page.route(process.env.MOCK_API, async route => {
 
     const json = {
       "items": [
@@ -187,7 +194,7 @@ test('listar usuários/ mock da API', async ({ page }) => {
   });
 
   //reponse da pagina
-  const response = await page.goto('http://localhost:5000/api/v1/Pessoas?page=1&pageSize=20');
+  const response = await page.goto(process.env.MOCK_API);
   const body = await response.json();
 
   //Validar o método de validação de dados do usuário
